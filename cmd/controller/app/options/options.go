@@ -97,6 +97,7 @@ type ControllerOptions struct {
 	// Allows controlling if recursive nameservers are only used for all checks.
 	// Normally authoritative nameservers are used for checking propagation.
 	DNS01RecursiveNameserversOnly bool
+	DSN01AllowFail                bool
 
 	EnableCertificateOwnerRef bool
 
@@ -140,6 +141,7 @@ const (
 	defaultEnableCertificateOwnerRef = false
 
 	defaultDNS01RecursiveNameserversOnly = false
+	defaultDNS01AllowFail                = false
 
 	defaultMaxConcurrentChallenges = 60
 
@@ -344,6 +346,9 @@ func (s *ControllerOptions) AddFlags(fs *pflag.FlagSet) {
 			"environments, where access to authoritative nameservers is restricted. "+
 			"Enabling this option could cause the DNS01 self check to take longer "+
 			"due to caching performed by the recursive nameservers.")
+	fs.BoolVar(&s.DSN01AllowFail, "dns01-allow-fail",
+		defaultDNS01AllowFail,
+		"When true, cert-manager will not force self-check of DNS propagation.")
 
 	fs.BoolVar(&s.EnableCertificateOwnerRef, "enable-certificate-owner-ref", defaultEnableCertificateOwnerRef, ""+
 		"Whether to set the certificate resource as an owner of secret where the tls certificate is stored. "+

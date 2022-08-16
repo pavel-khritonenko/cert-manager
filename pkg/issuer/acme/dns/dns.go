@@ -120,7 +120,7 @@ func (s *Solver) Check(ctx context.Context, issuer v1.GenericIssuer, ch *cmacme.
 	if err != nil {
 		return err
 	}
-	if !ok {
+	if !ok && !s.DSN01AllowFail {
 		return fmt.Errorf("DNS record for %q not yet propagated", ch.Spec.DNSName)
 	}
 

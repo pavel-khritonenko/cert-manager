@@ -182,6 +182,10 @@ type ACMEOptions struct {
 	// for ACME DNS01 validations.
 	DNS01Nameservers []string
 
+	// DNS01Allowfail allows to skip self-check if propagation check fails
+	// for ACME DNS01 validations.
+	DSN01AllowFail bool
+
 	// AccountRegistry is used as a cache of ACME accounts between various
 	// components of cert-manager
 	AccountRegistry accounts.Registry
